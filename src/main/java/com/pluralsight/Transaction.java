@@ -31,6 +31,9 @@ public class Transaction {
         return amount;
     }
 
+    public String getVendor() {
+        return vendor;
+    }
 
     @Override
     public String toString() {

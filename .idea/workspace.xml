@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea69688a-bbbb-47b0-8eca-276a2620b45c" name="Changes" comment="HomeScreen added">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" afterDir="false" />
+    <list default="true" id="ea69688a-bbbb-47b0-8eca-276a2620b45c" name="Changes" comment="ledger Screen added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/TransactionApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/TransactionApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760118481590</updated>
-      <workItem from="1760118482593" duration="4994000" />
+      <workItem from="1760118482593" duration="8196000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -89,27 +89,36 @@
       <option name="project" value="LOCAL" />
       <updated>1760120188714</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ledger Screen added">
+      <option name="closed" value="true" />
+      <created>1760123838664</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760123838664</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="homeScreen created" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="HomeScreen added" />
-    <option name="LAST_COMMIT_MESSAGE" value="HomeScreen added" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/pluralsight/TransactionApp.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="ledger Screen added" />
+    <option name="LAST_COMMIT_MESSAGE" value="ledger Screen added" />
   </component>
 </project>
