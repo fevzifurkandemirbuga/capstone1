@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,11 +12,9 @@ public class TransactionApp {
     public static ArrayList<Transaction> transactions=new ArrayList<>();
     public static void main(String[] args) {
 
-        data();
+        cvsToData();
         homeScreen();
         scan.close();
-
-
 
     }
 
@@ -34,13 +30,40 @@ public class TransactionApp {
             System.out.print("your choose: ");
             String input=scan.nextLine().toUpperCase();
             switch (input){
-                case "D" -> {}
-                case "P" -> {}
+                case "D" -> addTransaction(true);
+                case "P" -> addTransaction(false);
                 case "L" -> ledger();
                 case "X" -> running=false;
                 default -> System.out.println("wrong entry please try again.");
             }
         }
+    }
+
+    public static void addTransaction(boolean positive){
+
+        System.out.print("enter Vendor name: ");
+        String vendor=scan.nextLine();
+        System.out.print("enter description: ");
+        String description=scan.nextLine();
+        System.out.print("enter amount: ");
+
+        double amount= scan.nextDouble();
+        scan.nextLine();
+        amount=(!positive && amount>0 ? amount*-1 : amount);
+
+        LocalDate date=LocalDate.now();
+        LocalTime time=LocalTime.now().withNano(0);
+
+        Transaction t=new Transaction(date,time,description,vendor,amount);
+        dataToCvs(t);
+
+
+        transactions.add(t);
+        transactions.sort(Comparator
+                .comparing(Transaction::getDate)
+                .thenComparing(Transaction::getTime));
+
+
     }
 
     public static void ledger(){
@@ -155,7 +178,26 @@ public class TransactionApp {
 
     }
 
-    public static void data(){
+    public static void dataToCvs(Transaction t){
+
+        try{
+            FileWriter fw=new FileWriter("transactions.csv",true);
+            BufferedWriter bw=new BufferedWriter(fw);
+
+            String text=String.format("%s|%s|%s|%s|%.2f",
+                    t.getDate(),t.getTime(),t.getDescription(), t.getVendor(),t.getAmount());
+            bw.write(text+"\n");
+            bw.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void cvsToData(){
 
         try{
             FileReader fr=new FileReader("transactions.csv");
@@ -192,13 +234,6 @@ public class TransactionApp {
 
 
     }
-
-
-
-
-
-
-
 
 
 }

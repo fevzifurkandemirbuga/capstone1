@@ -35,6 +35,10 @@ public class Transaction {
         return vendor;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return "-----------------------------------------" +
