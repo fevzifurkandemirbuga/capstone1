@@ -41,7 +41,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "-----------------------------------------" +
+        return "\n-----------------------------------------" +
                 "\ndate= " + date +
                 "\ntime= " + time +
                 "\ndescription= '" + description + '\'' +

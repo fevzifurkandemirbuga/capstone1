@@ -111,12 +111,13 @@ public class TransactionApp {
         boolean running =true;
         while(running){
             System.out.println("""
-                ************** Reports
+                ***** Reports *****
                 1) Month To Date
                 2) Previous Month
                 3) Year To Date
                 4) Previous Year
                 5) Search by vendor
+                6) Custom Search
                 0) Back""");
             System.out.print("your choose: ");
             String input=scan.nextLine().toUpperCase();
@@ -171,11 +172,59 @@ public class TransactionApp {
                         System.out.println("transaction could not find");
                     }
                 }
+                case "6"-> customSearch();
                 case "0" -> running=false;
                 default -> System.out.println("wrong entry please try again.");
             }
         }
 
+    }
+    public static void customSearch(){
+
+        System.out.print("start date(year-month-day) (optional): ");
+        String startDate= scan.nextLine();
+        System.out.print("end date(year-month-day) (optional): ");
+        String endDate= scan.nextLine();
+        System.out.print("Description (optional): ");
+        String description=scan.nextLine();
+        System.out.print("vendor name (optional): ");
+        String vendor=scan.nextLine();
+        System.out.print("amount( ±10 ): ");
+        String strAmount=scan.nextLine();
+
+        ArrayList<Transaction> tempList = new ArrayList<>(transactions);
+
+
+        if(!startDate.isEmpty()){
+            String[] arr=startDate.split("-");
+            LocalDate date=LocalDate.of(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2]));
+            tempList.removeIf(t -> t.getDate().isBefore(date));
+        }
+
+        if(!endDate.isEmpty()){
+            String[] arr=endDate.split("-");
+            LocalDate date=LocalDate.of(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2]));
+            tempList.removeIf(t->t.getDate().isAfter(date));
+        }
+        if(!description.isEmpty()){
+            tempList.removeIf(t->t.getDescription().equalsIgnoreCase(description));
+        }
+        if(!vendor.isEmpty()){
+            tempList.removeIf(t->t.getVendor().equalsIgnoreCase(vendor));
+        }
+        if(!strAmount.isEmpty()){
+            int amount=(int) Double.parseDouble(strAmount);
+            tempList.removeIf(t -> Math.abs(t.getAmount() - amount) > 10 );
+        }
+
+        if(tempList.isEmpty()){
+            System.out.println("No matching transaction");
+        }
+        else{
+            for(Transaction t:tempList){
+                System.out.println(t);
+            }
+        }
     }
 
     public static void dataToCvs(Transaction t){
