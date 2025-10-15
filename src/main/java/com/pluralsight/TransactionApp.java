@@ -13,13 +13,13 @@ public class TransactionApp {
     public static ArrayList<Transaction> transactions=new ArrayList<>();
     public static void main(String[] args) {
 
-        cvsToData();
-        homeScreen();
+        csvToData();
+        displayHomeScreen();
         scan.close();
 
     }
 
-    public static void homeScreen(){
+    public static void displayHomeScreen(){
         boolean running=true;
         while(running){
             System.out.println("""
@@ -33,13 +33,12 @@ public class TransactionApp {
             switch (input){
                 case "D" -> addTransaction(true);
                 case "P" -> addTransaction(false);
-                case "L" -> ledger();
+                case "L" -> displayLedger();
                 case "X" -> running=false;
                 default -> System.out.println("wrong entry please try again.");
             }
         }
     }
-
     public static void addTransaction(boolean positive){
 
         System.out.print("enter Vendor name: ");
@@ -50,24 +49,21 @@ public class TransactionApp {
 
         double amount= scan.nextDouble();
         scan.nextLine();
+
         amount=(!positive && amount>0 ? amount*-1 : amount);
 
         LocalDate date=LocalDate.now();
         LocalTime time=LocalTime.now().withNano(0);
 
         Transaction t=new Transaction(date,time,description,vendor,amount);
-        dataToCvs(t);
-
+        dataToCsv(t);
 
         transactions.add(t);
         transactions.sort(Comparator
                 .comparing(Transaction::getDate)
                 .thenComparing(Transaction::getTime));
-
-
     }
-
-    public static void ledger(){
+    public static void displayLedger(){
 
         boolean running=true;
         while(running){
@@ -81,34 +77,36 @@ public class TransactionApp {
             System.out.print("your choose: ");
             String input=scan.nextLine().toUpperCase();
             switch (input){
-                case "A" -> {
-                    for(Transaction t:transactions){
-                        System.out.println(t);
-                    }
-                }
-                case "D" -> {
-                    for(Transaction t:transactions){
-                        if(t.getAmount()>0){
-                            System.out.println(t);
-                        }
-                    }
-                }
-                case "P" -> {
-                    for(Transaction t:transactions){
-                        if(t.getAmount()<0){
-                            System.out.println(t);
-                        }
-                    }
-                }
-                case "R" -> reports();
+                case "A" -> displayAll();
+                case "D" -> displayDeposits();
+                case "P" -> displayPayments();
+                case "R" -> displayReports();
                 case "H" -> running=false;
                 default -> System.out.println("wrong entry please try again.");
             }
         }
 
     }
-
-    public static void reports(){
+    public static void displayAll(){
+        for(Transaction t:transactions){
+            System.out.println(t);
+        }
+    }
+    public static void displayDeposits(){
+        for(Transaction t:transactions){
+            if(t.getAmount()>0){
+                System.out.println(t);
+            }
+        }
+    }
+    public static void displayPayments(){
+        for(Transaction t:transactions){
+            if(t.getAmount()<0){
+                System.out.println(t);
+            }
+        }
+    }
+    public static void displayReports(){
         boolean running =true;
         while(running){
             System.out.println("""
@@ -123,62 +121,68 @@ public class TransactionApp {
             System.out.print("your choose: ");
             String input=scan.nextLine().toUpperCase();
             switch (input){
-                case "1" -> {
-                    LocalDate currentMonth=LocalDate.now().withDayOfMonth(1);
-                    for(Transaction t:transactions){
-                        if(t.getDate().isAfter(currentMonth)){
-                            System.out.println(t);
-                        }
-
-                    }
-                }
-                case "2" -> {
-                    LocalDate lastMonthEnd=LocalDate.now().withDayOfMonth(1).minusDays(1);
-                    LocalDate lastMonthStart=LocalDate.now().minusMonths(1).withDayOfMonth(1);
-                    for(Transaction t:transactions){
-                        if(t.getDate().isAfter(lastMonthStart) && t.getDate().isBefore(lastMonthEnd)){
-                            System.out.println(t);
-                        }
-
-                    }}
-                case "3" -> {
-                    LocalDate currentYear=LocalDate.now().withMonth(1).withDayOfMonth(1);
-                    for(Transaction t:transactions){
-                        if(t.getDate().isAfter(currentYear)){
-                            System.out.println(t);
-                        }
-                    }
-                }
-                case "4" -> {
-                    LocalDate lastYearStart=LocalDate.now().minusYears(1).withMonth(1).withDayOfMonth(1);
-                    LocalDate lastYearEnd=LocalDate.now().withMonth(1).withDayOfMonth(1).minusDays(1);
-                    for(Transaction t:transactions){
-                        if(t.getDate().isAfter(lastYearStart) && t.getDate().isBefore(lastYearEnd)){
-                            System.out.println(t);
-                        }
-
-                    }}
-                case "5" -> {
-                    boolean found=false;
-                    System.out.print("Vendor name: ");
-                    String vendorName= scan.nextLine();
-                    for(Transaction t:transactions){
-                        if (t.getVendor().equalsIgnoreCase(vendorName)){
-                            found=true;
-                            System.out.println(t);
-                        }
-
-                    }
-                    if(!found){
-                        System.out.println("transaction could not find");
-                    }
-                }
+                case "1" -> monthToDateReport();
+                case "2" -> previousMonthReport();
+                case "3" -> yearToDateReport();
+                case "4" -> previousYearReport();
+                case "5" -> searchByVendor();
                 case "6"-> customSearch();
                 case "0" -> running=false;
                 default -> System.out.println("wrong entry please try again.");
             }
         }
 
+    }
+    public static void monthToDateReport(){
+        LocalDate currentMonth=LocalDate.now().withDayOfMonth(1);
+        for(Transaction t:transactions){
+            if(t.getDate().isAfter(currentMonth)){
+                System.out.println(t);
+            }
+
+        }
+    }
+    public static void previousMonthReport(){
+        LocalDate lastMonthEnd=LocalDate.now().withDayOfMonth(1).minusDays(1);
+        LocalDate lastMonthStart=LocalDate.now().minusMonths(1).withDayOfMonth(1);
+        for(Transaction t:transactions){
+            if(t.getDate().isAfter(lastMonthStart) && t.getDate().isBefore(lastMonthEnd)){
+                System.out.println(t);
+            }
+
+        }
+    }
+    public static void yearToDateReport(){
+        LocalDate currentYear=LocalDate.now().withMonth(1).withDayOfMonth(1);
+        for(Transaction t:transactions){
+            if(t.getDate().isAfter(currentYear)){
+                System.out.println(t);
+            }
+        }
+    }
+    public static void previousYearReport(){
+        LocalDate lastYearStart=LocalDate.now().minusYears(1).withMonth(1).withDayOfMonth(1);
+        LocalDate lastYearEnd=LocalDate.now().withMonth(1).withDayOfMonth(1).minusDays(1);
+        for(Transaction t:transactions){
+            if(t.getDate().isAfter(lastYearStart) && t.getDate().isBefore(lastYearEnd)){
+                System.out.println(t);
+            }
+
+        }
+    }
+    public static void searchByVendor(){
+        boolean found=false;
+        System.out.print("Vendor name: ");
+        String vendorName= scan.nextLine();
+        for(Transaction t:transactions){
+            if (t.getVendor().equalsIgnoreCase(vendorName)){
+                found=true;
+                System.out.println(t);
+            }
+        }
+        if(!found){
+            System.out.println("transaction could not find");
+        }
     }
     public static void customSearch(){
 
@@ -238,7 +242,7 @@ public class TransactionApp {
                 System.out.println("invalid date please try again");
                 continue;
             }catch (NumberFormatException e){
-                System.out.println("wrong input type please try againr");
+                System.out.println("wrong input type please try again");
                 continue;
             }
             break;
@@ -253,8 +257,7 @@ public class TransactionApp {
             }
         }
     }
-
-    public static void dataToCvs(Transaction t){
+    public static void dataToCsv(Transaction t){
 
         try{
             FileWriter fw=new FileWriter("transactions.csv",true);
@@ -272,8 +275,7 @@ public class TransactionApp {
 
 
     }
-
-    public static void cvsToData(){
+    public static void csvToData(){
 
         try{
             FileReader fr=new FileReader("transactions.csv");
@@ -310,6 +312,4 @@ public class TransactionApp {
 
 
     }
-
-
 }
