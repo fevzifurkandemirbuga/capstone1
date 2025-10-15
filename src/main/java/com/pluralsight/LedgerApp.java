@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class TransactionApp {
+public class LedgerApp {
     public static Scanner scan = new Scanner(System.in);
     public static ArrayList<Transaction> transactions=new ArrayList<>();
     public static void main(String[] args) {

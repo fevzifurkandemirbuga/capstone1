@@ -1,9 +1,9 @@
-## Capstone 1: Accounting Ledger Application
+# Capstone 1: Accounting Ledger Application
 
 track all financial
 transactions for a business or for personal use.
 
-### Features
+## Features
 - Home Screen
   - Ledger Menu
     - Reports Menu
