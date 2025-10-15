@@ -11,19 +11,19 @@ transactions for a business or for personal use.
   ### Home Screen Menu
   - Add Deposit `addTransaction(true);`
   - Make Payment `addTransaction(false);`
-  - Display Ledger `ledger()`
+  - Display Ledger `displayLedger()`
 
   ### Ledger Screen Menu
-  - Display All Entries
-  - Deposits
-  - Payments
-  - Reports `reports()`
+  - Display All Entries `displayAll()`
+  - Deposits `displayDeposits()`
+  - Payments `displayPayments()`
+  - Reports `displayReports()`
   
   ### Reports Screen Menu
   
-  - 1)Month To Date
-  - 2)Previous Month
-  - 3)Year To Date
-  - 4)Previous Year
-  - 5)Search by vendor
-  - 6)Custom Search
+  - 1)Month To Date `monthToDateReport()`
+  - 2)Previous Month `previousMonthReport()`
+  - 3)Year To Date `yearToDateReport`
+  - 4)Previous Year `previousYearReport()`
+  - 5)Search by vendor `searchByVendor()`
+  - 6)Custom Search `customSearch()`
