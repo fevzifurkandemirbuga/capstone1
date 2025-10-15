@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea69688a-bbbb-47b0-8eca-276a2620b45c" name="Changes" comment="custom search added">
+    <list default="true" id="ea69688a-bbbb-47b0-8eca-276a2620b45c" name="Changes" comment="extracted Menus into separate method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/TransactionApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/TransactionApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Transaction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,28 +23,32 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="33svAk5YLsxohqgU8PGd22k1kpL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fevzi\OneDrive\Masaüstü\java\TransactionApp" />
@@ -63,7 +67,9 @@
       <workItem from="1760451249189" duration="152000" />
       <workItem from="1760451428350" duration="10372000" />
       <workItem from="1760464447778" duration="591000" />
-      <workItem from="1760465067167" duration="3969000" />
+      <workItem from="1760465067167" duration="5918000" />
+      <workItem from="1760542610058" duration="3308000" />
+      <workItem from="1760546913382" duration="4130000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -129,7 +135,31 @@
       <option name="project" value="LOCAL" />
       <updated>1760461239330</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="try catch block added to custom search">
+      <option name="closed" value="true" />
+      <created>1760539060015</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760539060015</updated>
+    </task>
+    <task id="LOCAL-00010" summary="README.md file added">
+      <option name="closed" value="true" />
+      <created>1760546379758</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760546379758</updated>
+    </task>
+    <task id="LOCAL-00011" summary="extracted Menus into separate method">
+      <option name="closed" value="true" />
+      <created>1760550448452</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760550448453</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +184,9 @@
     <MESSAGE value="Reports Screen added" />
     <MESSAGE value="Home/add deposit and home/make payment options added" />
     <MESSAGE value="custom search added" />
-    <option name="LAST_COMMIT_MESSAGE" value="custom search added" />
+    <MESSAGE value="try catch block added to custom search" />
+    <MESSAGE value="README.md file added" />
+    <MESSAGE value="extracted Menus into separate method" />
+    <option name="LAST_COMMIT_MESSAGE" value="extracted Menus into separate method" />
   </component>
 </project>

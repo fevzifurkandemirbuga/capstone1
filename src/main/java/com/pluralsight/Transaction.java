@@ -5,11 +5,11 @@ import java.time.LocalTime;
 
 public class Transaction {
 
-    private LocalDate date;
-    private LocalTime time;
-    private String description;
-    private String vendor;
-    private double amount;
+    final private LocalDate date;
+    final private LocalTime time;
+    final private String description;
+    final private String vendor;
+    final private double amount;
 
     public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
         this.date = date;
@@ -42,11 +42,11 @@ public class Transaction {
     @Override
     public String toString() {
         return "\n-----------------------------------------" +
-                "\ndate= " + date +
-                "\ntime= " + time +
-                "\ndescription= '" + description + '\'' +
-                "\nvendor= '" + vendor + '\'' +
-                "\namount= " + amount +
+                "\ndate: " + date +
+                "\ntime: " + time +
+                "\ndescription: '" + description + '\'' +
+                "\nvendor: '" + vendor + '\'' +
+                "\namount: " + amount +
                 "\n-----------------------------------------";
     }
 }
