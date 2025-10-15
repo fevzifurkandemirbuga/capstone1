@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class TransactionApp {
                 L) Ledger
                 X) Exit""");
             System.out.print("your choose: ");
-            String input=scan.nextLine().toUpperCase();
+            String input=scan.nextLine().toUpperCase().trim();
             switch (input){
                 case "D" -> addTransaction(true);
                 case "P" -> addTransaction(false);
@@ -42,9 +43,9 @@ public class TransactionApp {
     public static void addTransaction(boolean positive){
 
         System.out.print("enter Vendor name: ");
-        String vendor=scan.nextLine();
+        String vendor=scan.nextLine().trim();
         System.out.print("enter description: ");
-        String description=scan.nextLine();
+        String description=scan.nextLine().trim();
         System.out.print("enter amount: ");
 
         double amount= scan.nextDouble();
@@ -181,40 +182,66 @@ public class TransactionApp {
     }
     public static void customSearch(){
 
-        System.out.print("start date(year-month-day) (optional): ");
-        String startDate= scan.nextLine();
-        System.out.print("end date(year-month-day) (optional): ");
-        String endDate= scan.nextLine();
-        System.out.print("Description (optional): ");
-        String description=scan.nextLine();
-        System.out.print("vendor name (optional): ");
-        String vendor=scan.nextLine();
-        System.out.print("amount( ±10 ): ");
-        String strAmount=scan.nextLine();
-
         ArrayList<Transaction> tempList = new ArrayList<>(transactions);
 
+        while(true){
+            try{
+//                START DATE
+                System.out.print("start date(year-month-day) (optional): ");
+                String startDate= scan.nextLine();
+                if(!startDate.isEmpty()){
+                    String[] arr=startDate.split("-");
+                    if(arr.length!=3){
+                        System.out.println("wrong input syntax please try again");
+                        continue;
+                    }
+                    LocalDate date=LocalDate.of(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2]));
+                    tempList.removeIf(t -> t.getDate().isBefore(date));
+                }
 
-        if(!startDate.isEmpty()){
-            String[] arr=startDate.split("-");
-            LocalDate date=LocalDate.of(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2]));
-            tempList.removeIf(t -> t.getDate().isBefore(date));
-        }
+//                END DATE
+                System.out.print("end date(year-month-day) (optional): ");
+                String endDate= scan.nextLine();
+                if(!endDate.isEmpty()){
+                    String[] arr=endDate.split("-");
+                    if(arr.length!=3){
+                        System.out.println("wrong input syntax please try again");
+                        continue;
+                    }
+                    LocalDate date=LocalDate.of(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2]));
+                    tempList.removeIf(t->t.getDate().isAfter(date));
+                }
 
-        if(!endDate.isEmpty()){
-            String[] arr=endDate.split("-");
-            LocalDate date=LocalDate.of(Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2]));
-            tempList.removeIf(t->t.getDate().isAfter(date));
-        }
-        if(!description.isEmpty()){
-            tempList.removeIf(t->t.getDescription().equalsIgnoreCase(description));
-        }
-        if(!vendor.isEmpty()){
-            tempList.removeIf(t->t.getVendor().equalsIgnoreCase(vendor));
-        }
-        if(!strAmount.isEmpty()){
-            int amount=(int) Double.parseDouble(strAmount);
-            tempList.removeIf(t -> Math.abs(t.getAmount() - amount) > 10 );
+//                DESCRIPTION
+                System.out.print("description (optional): ");
+                String description=scan.nextLine();
+                if(!description.isEmpty()){
+                    tempList.removeIf(t->t.getDescription().equalsIgnoreCase(description));
+                }
+
+//                VENDOR NAME
+                System.out.print("vendor name (optional): ");
+                String vendor=scan.nextLine();
+                if(!vendor.isEmpty()){
+                    tempList.removeIf(t->t.getVendor().equalsIgnoreCase(vendor));
+                }
+
+//                AMOUNT
+                System.out.print("amount( ±10, optional ): ");
+                String strAmount=scan.nextLine();
+                if(!strAmount.isEmpty()){
+                    double amount= Double.parseDouble(strAmount);
+                    tempList.removeIf(t -> Math.abs(t.getAmount() - amount) > 10 );
+                }
+
+            }catch (DateTimeException e){
+                System.out.println("invalid date please try again");
+                continue;
+            }catch (NumberFormatException e){
+                System.out.println("wrong input type please try againr");
+                continue;
+            }
+            break;
         }
 
         if(tempList.isEmpty()){
